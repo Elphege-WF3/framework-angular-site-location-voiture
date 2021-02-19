@@ -1,0 +1,26 @@
+<div class="card text-center shadow">
+    <div class="card-header bg-dark text-white">
+        <h2 class="card-title">{{car.name | titlecase }}</h2>
+    </div>
+    <div class="card-body">
+        <img [src]="car.coverImage" class="img-fluid" alt="photo {{car.name}}">
+        <hr>
+        <p>Origine: {{car.pays | uppercase }}  <span *ngIf="car.pays == null"> N.C</span></p>
+
+        <p>Puissance: <span [ngClass]="{'badge':true, 
+            'badge-info':car.power < 1000, 
+            'badge-warning':car.power >= 1000}">
+            {{car.power}} CH </span></p>
+
+        <p>0 à 100 km/h: {{car.perf}} <span *ngIf="car.perf == null"> N.C</span> sec </p>
+
+        <p [ngClass]="{ 'badge':true,
+                'badge-success': car.stock >= 3,
+                'badge-danger':  car.stock <= 2  }">
+                Disponibilité : {{car.stock}} en stock</p>
+
+        <p [ngClass]="{'text-success':isBooked}">{{bookingMessage}}</p>
+        <button class="btn btn-primary" (click)="onBooking()" [disabled]="isBooked">Réserver</button>
+    </div>
+</div>
+<hr>
